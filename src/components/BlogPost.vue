@@ -41,8 +41,6 @@ import axios from 'axios'
     data() {
       return {
         allPosts: [],
-        post: {},
-        next: {},
         singlePostFull: []
       }
     },
