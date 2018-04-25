@@ -11,24 +11,17 @@
       </div>
     </div>
 
-
-
-
-    <div v-if="previousPost">
-      Yes
-      <router-link :to="{name:'blog-post', params: { slug: previousPost.slug }}" class="button previous">
-      {{previousPost.title.rendered}} | Previous Post
+    <div v-if="firstPost">
+      <router-link :to="{name:'blog-post', params: { slug: previousPostUrl.slug }}" class="button previous">
+      {{previousPostUrl.title.rendered}} | Previous Post
     </router-link>
     </div>
-    <div v-else >No</div>
 
-    <div v-if="nextPost">
-      Yes
-      <router-link :to="{name:'blog-post', params: { slug: nextPost.slug }}" class="button next">
-      {{nextPost.title.rendered}} | Next Post
+    <div v-if="lastPost">
+      <router-link :to="{name:'blog-post', params: { slug: nextPostUrl.slug }}" class="button next">
+      {{nextPostUrl.title.rendered}} | Next Post
     </router-link>
     </div>
-    <div v-else >No</div>
 
   </div>
 </template>
@@ -66,34 +59,67 @@ import axios from 'axios'
           const singlePost = allPosts.find(single => single.slug === this.slug)
           this.singlePostFull = singlePost
         })
-
       }
 
     },
     computed: {
-      previousPost () {
-        return this.allPosts.find(d1 => d1.date < this.singlePost.date)
+      postId() {
+        return this.singlePostFull.id
       },
-      nextPost () {
-        return this.allPosts.find(d1 => d1.date > this.singlePost.date)
+      idArray() {
+        return this.allPosts.map(a => a.id)
+      },
+      closestHigh() {
+        return Math.max.apply(null, this.idArray)
+      },
+      closestLow() {
+        return Math.min.apply(null, this.idArray)
+      },
+      previousPostId () {
+        let previous = this.closestLow
+        for(var i=0; i < this.idArray.length; i++) {
+          if(this.idArray[i] < this.postId && this.idArray[i] > previous  ) previous = this.idArray[i]
+        }
+        return previous
+      },
+      nextPostId () {
+        let next = this.closestHigh
+        for(var i=0; i < this.idArray.length; i++){
+          if(this.idArray[i] > this.postId && this.idArray[i] < next) next = this.idArray[i]
+        }
+        return next
       },
       singlePost () {
         return this.allPosts.find(single => single.slug === this.slug)
+      },
+      nextPostUrl () {
+        return this.allPosts.find(url => url.id === this.nextPostId)
+      },
+      previousPostUrl () {
+        return this.allPosts.find(url => url.id === this.previousPostId)
+      },
+      firstPost() {
+        let firstPost = true
+        if(this.previousPostId === this.postId) {firstPost = false} 
+        return firstPost
+      },
+      lastPost() {
+        let lastPost = true
+        if(this.nextPostId === this.postId) {lastPost = false}
+        return lastPost
       }
-
     },
     watch: {
-      $route(to, from) {
-      this.getAllPosts ()
-      this.singlePostFullData ()
+       $route(to, from) {
+        this.getAllPosts ()
+        this.singlePostFullData ()
+
       }
     },
     created() {
       this.getAllPosts ()
       this.singlePostFullData ()
 
-    },
-    beforeCreate: function () {
     }
   }
 </script>
