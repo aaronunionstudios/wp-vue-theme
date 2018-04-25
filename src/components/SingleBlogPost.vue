@@ -26,12 +26,9 @@ import axios from 'axios'
         }).then(response => {
           const allPosts = response.data
           const todaysDate = Date()
-          console.log('date', todaysDate)
-          console.log('all Posts', allPosts)
           const postsArrayId = allPosts.sort(function (a, b) {
             return b.id - a.id;
           });
-          console.log('sorted', postsArrayId[0].id)
 
           axios({
             method: 'get',
@@ -39,7 +36,6 @@ import axios from 'axios'
           }).then(response => {
             const singlePost = response.data
             const imgUrl = singlePost._embedded["wp:featuredmedia"][0].source_url
-            console.log('img url', imgUrl)
             this.post = singlePost
             this.img = imgUrl
           })

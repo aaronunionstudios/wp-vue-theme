@@ -39,10 +39,8 @@ import axios from 'axios'
 
           const pageLoop = []
           allPages.sort((x,y) => x.menu_order - y.menu_order).forEach(element => {
-            console.log('loop', element)
             pageLoop.push(element)
           });
-          console.log('page loop', pageLoop)
           this.pageLoop = pageLoop
         })
       }
@@ -54,7 +52,6 @@ import axios from 'axios'
     },
     created() {
       this.getPages()
-      console.log('dillon', this.$router)
     }
   }
 </script>

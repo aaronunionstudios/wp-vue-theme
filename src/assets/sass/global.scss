@@ -1,3 +1,13 @@
 div {
   box-sizing:border-box;
 }
+a,
+a.link {
+  color:$brand-green;
+
+  &:hover {
+    color:$brand-green;
+    text-decoration: none;
+    opacity:0.8;
+  }
+}

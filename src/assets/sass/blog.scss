@@ -6,3 +6,41 @@
   float:right;
   display:inline-block;
 }
+
+#blog-home {
+  h1 {text-align: center;}
+}
+
+.blogroll {
+  width:100%;
+  float:left;
+  display:flex;
+  flex-flow: row nowrap;
+  justify-content:center;
+  padding:30px;
+
+  .__blogroll-img {
+    width:25%;
+    height:auto;
+    overflow:hidden;
+    float:left;
+
+    img {
+      width:100%;
+      height:auto;
+    }
+  }
+  .__blogroll-content {
+    width:75%;
+    float:left;
+    display:block;
+    padding-left:30px;
+
+    h2 {
+      padding:0 0 20px 0;
+    }
+    p {
+
+    }
+  }
+}
