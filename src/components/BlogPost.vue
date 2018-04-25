@@ -12,13 +12,13 @@
     </div>
 
     <div v-if="firstPost">
-      <router-link :to="{name:'blog-post', params: { slug: previousPostUrl.slug }}" class="button previous">
+      <router-link v-if="previousPostUrl" :to="{name:'blog-post', params: { slug: previousPostUrl.slug }}" class="button previous">
       {{previousPostUrl.title.rendered}} | Previous Post
     </router-link>
     </div>
 
     <div v-if="lastPost">
-      <router-link :to="{name:'blog-post', params: { slug: nextPostUrl.slug }}" class="button next">
+      <router-link v-if="nextPostUrl" :to="{name:'blog-post', params: { slug: nextPostUrl.slug }}" class="button next">
       {{nextPostUrl.title.rendered}} | Next Post
     </router-link>
     </div>
@@ -100,17 +100,17 @@ import axios from 'axios'
       },
       firstPost() {
         let firstPost = true
-        if(this.previousPostId === this.postId) {firstPost = false} 
+        if(this.previousPostId === this.postId) firstPost = false
         return firstPost
       },
       lastPost() {
         let lastPost = true
-        if(this.nextPostId === this.postId) {lastPost = false}
+        if(this.nextPostId === this.postId) lastPost = false
         return lastPost
       }
     },
     watch: {
-       $route(to, from) {
+      $route(to, from) {
         this.getAllPosts ()
         this.singlePostFullData ()
 
