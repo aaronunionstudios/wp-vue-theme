@@ -1,8 +1,10 @@
 <template>
   <div class="home">
     <singleblogpost></singleblogpost>
-    <h1 v-if="page.title">{{ page.title.rendered }}</h1>
-    <div v-if="page.content" v-html="page.content.rendered"></div>
+    <div class="content">
+      <h1 v-if="page.title">{{ page.title.rendered }}</h1>
+      <div v-if="page.content" v-html="page.content.rendered"></div>
+    </div>
   </div>
 </template>
 

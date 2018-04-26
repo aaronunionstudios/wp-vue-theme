@@ -1,11 +1,18 @@
+#app {
+  overflow:hidden;
+}
 .header {
   width:100%;
   float:left;
   background-color:$brand-darkgray;
 }
-.content {
+.main {
   width:100%;
   float:left;
+  
+  .content {
+    padding:30px;
+  }
 }
 .footer {
   width:100%;

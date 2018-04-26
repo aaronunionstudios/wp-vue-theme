@@ -2,7 +2,7 @@
   <div id="app">
     <header-app></header-app>
     <!-- <transition name="fade"> -->
-      <div class="content">
+      <div class="main">
         <router-view></router-view>
       </div>
     <!-- </transition> -->

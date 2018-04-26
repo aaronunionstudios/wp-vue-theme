@@ -1,10 +1,11 @@
 /*
 Theme Name: Vue Test Theme
-Theme URI: http://#
+Theme URI: 
 Author: NA
-Author URI: http://#
+Author URI: 
 Description: A WordPress theme with Vue.js and REST API
 Version: 1.0.0
 License: MIT
 Contributors: NA
 */
+@import url("dist/theme-styles.css");
